@@ -111,7 +111,7 @@ def solve_extensive_form(
         raise RuntimeError(f"extensive-form solve failed: {result.message}")
     node_count_raw = getattr(result, "mip_node_count", 0)
     node_count = int(node_count_raw) if node_count_raw is not None else 0
-    y = tuple(int(round(value)) for value in np.asarray(result.x[:facility_count], dtype=float))
+    y = tuple(round(value) for value in np.asarray(result.x[:facility_count], dtype=float))
     return OracleResult(
         method="extensive_form",
         objective=float(result.fun),
