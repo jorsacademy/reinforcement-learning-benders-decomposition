@@ -1,0 +1,37 @@
+{
+  "protocol_version": "1.0",
+  "training": {
+    "instances": 24,
+    "facilities": 5,
+    "customers": 8,
+    "scenarios": 8,
+    "spatial_regime": "uniform",
+    "demand_regime": "stable",
+    "episodes": 240,
+    "seed": 2026
+  },
+  "q_learning": {
+    "learning_rate": 0.18,
+    "discount_factor": 0.95,
+    "epsilon_start": 1.0,
+    "epsilon_end": 0.05
+  },
+  "benders": {
+    "optimality_tolerance": 1e-7,
+    "cut_violation_tolerance": 1e-7,
+    "max_policy_decisions": 80,
+    "max_completion_iterations": 120,
+    "stall_limit": 3,
+    "certification_gap_threshold": 0.005
+  },
+  "evaluation": {
+    "instances_per_scenario": 8,
+    "scenarios": [
+      "in_distribution",
+      "demand_volatility_shift",
+      "spatial_cluster_shift",
+      "scenario_count_shift",
+      "problem_size_shift"
+    ]
+  }
+}
