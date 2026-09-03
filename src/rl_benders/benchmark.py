@@ -13,6 +13,7 @@ from rl_benders.benders import BendersConfig, BendersResult, RewardConfig, solve
 from rl_benders.control import (
     AdaptiveHeuristicPolicy,
     CutBatchAction,
+    CutBatchPolicy,
     FixedActionPolicy,
     RandomPolicy,
 )
@@ -170,7 +171,7 @@ def run_benchmark(
             "runtime_seconds": reference.runtime_seconds,
             "mip_node_count": reference.mip_node_count,
         }
-        policies = [
+        policies: list[CutBatchPolicy] = [
             FixedActionPolicy(CutBatchAction.ALL),
             FixedActionPolicy(CutBatchAction.ONE),
             FixedActionPolicy(CutBatchAction.HALF),
