@@ -47,7 +47,7 @@ def test_q_update_moves_selected_action_toward_positive_target() -> None:
         discount_factor=0.9,
     )
     action_index = ACTION_ORDER.index(action)
-    assert policy.q_values[state + (action_index,)] == pytest.approx(1.0)
+    assert policy.q_values[(*state, action_index)] == pytest.approx(1.0)
 
 
 def test_q_checkpoint_round_trip(tmp_path: Path) -> None:
