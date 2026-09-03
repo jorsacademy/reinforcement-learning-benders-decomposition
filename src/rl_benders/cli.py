@@ -4,12 +4,12 @@ from __future__ import annotations
 
 import argparse
 import json
+from collections.abc import Sequence
 from dataclasses import asdict
 from pathlib import Path
-from typing import Sequence
 
-from rl_benders.benders import BendersConfig, BendersResult, solve_with_policy
 from rl_benders.benchmark import run_benchmark, save_report_csv, save_report_json
+from rl_benders.benders import BendersConfig, BendersResult, solve_with_policy
 from rl_benders.control import (
     AdaptiveHeuristicPolicy,
     CutBatchAction,
