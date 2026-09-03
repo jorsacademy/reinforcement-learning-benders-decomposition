@@ -19,7 +19,10 @@ class BendersCut:
     def rhs(self, y: tuple[float, ...] | tuple[int, ...]) -> float:
         if len(y) != len(self.beta):
             raise ValueError("first-stage vector length does not match cut coefficients")
-        return self.alpha + sum(coefficient * value for coefficient, value in zip(self.beta, y))
+        return self.alpha + sum(
+            coefficient * value
+            for coefficient, value in zip(self.beta, y, strict=True)
+        )
 
     def violation(self, y: tuple[float, ...] | tuple[int, ...], theta: float) -> float:
         return self.rhs(y) - theta
