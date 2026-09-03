@@ -142,10 +142,10 @@ class TabularQPolicy:
         state_index = self._state_index(state)
         next_index = self._state_index(next_state)
         action_index = ACTION_ORDER.index(action)
-        current = float(self.q_values[state_index + (action_index,)])
+        current = float(self.q_values[(*state_index, action_index)])
         bootstrap = 0.0 if terminal else float(np.max(self.q_values[next_index]))
         target = reward + discount_factor * bootstrap
-        self.q_values[state_index + (action_index,)] = current + learning_rate * (target - current)
+        self.q_values[(*state_index, action_index)] = current + learning_rate * (target - current)
 
     def save(self, path: str | Path, *, metadata: dict[str, object] | None = None) -> None:
         output = Path(path)
