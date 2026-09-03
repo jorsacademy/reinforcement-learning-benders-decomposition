@@ -54,12 +54,10 @@ def solve_extensive_form(
     shortage = np.asarray(instance.shortage_penalties, dtype=float)
     for scenario_index, scenario in enumerate(instance.scenarios):
         start = facility_count + scenario_index * scenario_block
-        objective[start : start + customer_count * facility_count] = (
-            scenario.probability * shipping
+        objective[start : start + customer_count * facility_count] = scenario.probability * shipping
+        objective[start + customer_count * facility_count : start + scenario_block] = (
+            scenario.probability * shortage
         )
-        objective[
-            start + customer_count * facility_count : start + scenario_block
-        ] = scenario.probability * shortage
 
     rows: list[np.ndarray] = []
     lower_bounds: list[float] = []
