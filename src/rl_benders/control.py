@@ -2,17 +2,17 @@
 
 from __future__ import annotations
 
-import enum
 import math
 import random
 from dataclasses import dataclass, field
+from enum import StrEnum
 from typing import Protocol, TypeAlias
 
 from rl_benders.cuts import BendersCut
 from rl_benders.master import MasterResult
 
 
-class CutBatchAction(str, enum.Enum):
+class CutBatchAction(StrEnum):
     """How many currently violated scenario cuts to add."""
 
     ONE = "one"
