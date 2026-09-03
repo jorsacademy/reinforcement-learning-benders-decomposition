@@ -196,17 +196,17 @@ def main(argv: Sequence[str] | None = None) -> int:
             q_policy = (
                 TabularQPolicy.load(args.checkpoint, seed=args.seed) if args.checkpoint else None
             )
-            report = run_benchmark(
+            benchmark_report = run_benchmark(
                 instances,
                 q_policy=q_policy,
                 benders_config=BendersConfig(max_policy_decisions=args.max_policy_decisions),
                 random_seed=args.seed,
             )
             if args.output_json:
-                save_report_json(report, args.output_json)
+                save_report_json(benchmark_report, args.output_json)
             if args.output_csv:
-                save_report_csv(report, args.output_csv)
-            _write_or_print(report.to_dict(), None)
+                save_report_csv(benchmark_report, args.output_csv)
+            _write_or_print(benchmark_report.to_dict(), None)
             return 0
 
         config = ResearchConfig(
@@ -218,17 +218,17 @@ def main(argv: Sequence[str] | None = None) -> int:
             episodes=args.episodes,
             seed=args.seed,
         )
-        policy, report = run_research_experiment(
+        policy, research_report = run_research_experiment(
             config,
             benders_config=BendersConfig(max_policy_decisions=args.max_policy_decisions),
         )
         policy.save(args.checkpoint)
-        save_research_report(report, args.output_report)
+        save_research_report(research_report, args.output_report)
         _write_or_print(
             {
                 "checkpoint": str(args.checkpoint),
                 "report": str(args.output_report),
-                "training_certification_rate": report.training["certification_rate"],
+                "training_certification_rate": research_report.training["certification_rate"],
             },
             None,
         )
