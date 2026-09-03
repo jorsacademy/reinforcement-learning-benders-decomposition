@@ -170,7 +170,7 @@ def solve_recourse(
     capacities = np.asarray(instance.capacities, dtype=float)
     beta = tuple(float(-capacities[index] * lambdas[index]) for index in range(facility_count))
     alpha = float(np.asarray(scenario.demand, dtype=float) @ pi)
-    source_y = tuple(int(round(value)) for value in y_values)
+    source_y = tuple(round(value) for value in y_values)
     cut = BendersCut(
         scenario_index=scenario_index,
         alpha=alpha,
@@ -203,6 +203,6 @@ def evaluate_recourse(
     )
     expected = sum(
         scenario.probability * result.objective
-        for scenario, result in zip(instance.scenarios, results)
+        for scenario, result in zip(instance.scenarios, results, strict=True)
     )
     return float(expected), results
