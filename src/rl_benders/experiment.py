@@ -6,8 +6,8 @@ import json
 from dataclasses import asdict, dataclass
 from pathlib import Path
 
-from rl_benders.benders import BendersConfig, RewardConfig
 from rl_benders.benchmark import BenchmarkReport, run_benchmark
+from rl_benders.benders import BendersConfig, RewardConfig
 from rl_benders.domain import (
     DemandRegime,
     SpatialRegime,
