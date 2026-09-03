@@ -175,8 +175,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             if args.instances <= 0:
                 raise ValueError("--instances must be positive")
             instances = [
-                _generated_instance(args, seed=args.seed + index)
-                for index in range(args.instances)
+                _generated_instance(args, seed=args.seed + index) for index in range(args.instances)
             ]
             policy, summary = train_q_policy(
                 instances,
@@ -192,13 +191,10 @@ def main(argv: Sequence[str] | None = None) -> int:
             if args.instances <= 0:
                 raise ValueError("--instances must be positive")
             instances = [
-                _generated_instance(args, seed=args.seed + index)
-                for index in range(args.instances)
+                _generated_instance(args, seed=args.seed + index) for index in range(args.instances)
             ]
             q_policy = (
-                TabularQPolicy.load(args.checkpoint, seed=args.seed)
-                if args.checkpoint
-                else None
+                TabularQPolicy.load(args.checkpoint, seed=args.seed) if args.checkpoint else None
             )
             report = run_benchmark(
                 instances,
