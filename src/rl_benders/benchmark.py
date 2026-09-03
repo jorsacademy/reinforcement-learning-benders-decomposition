@@ -109,20 +109,21 @@ def _confidence_half_width(values: list[float]) -> float:
     return 1.96 * statistics.stdev(values) / math.sqrt(len(values))
 
 
+def _attribute_values(rows: list[BenchmarkRow], attribute: str) -> list[float]:
+    return [float(getattr(row, attribute)) for row in rows]
+
+
 def _summarize(rows: list[BenchmarkRow]) -> dict[str, dict[str, float]]:
     summary: dict[str, dict[str, float]] = {}
     for method in sorted({row.method for row in rows}):
         selected = [row for row in rows if row.method == method]
 
-        def values(attribute: str) -> list[float]:
-            return [float(getattr(row, attribute)) for row in selected]
-
-        gaps = values("objective_gap_percent")
-        times = values("total_seconds")
-        decisions = values("policy_decisions")
-        cuts = values("cut_count")
-        rewards = values("cumulative_reward")
-        nodes = values("master_nodes")
+        gaps = _attribute_values(selected, "objective_gap_percent")
+        times = _attribute_values(selected, "total_seconds")
+        decisions = _attribute_values(selected, "policy_decisions")
+        cuts = _attribute_values(selected, "cut_count")
+        rewards = _attribute_values(selected, "cumulative_reward")
+        nodes = _attribute_values(selected, "master_nodes")
         summary[method] = {
             "instances": float(len(selected)),
             "certified_rate": statistics.fmean(float(row.certified) for row in selected),
