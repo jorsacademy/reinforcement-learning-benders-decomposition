@@ -113,9 +113,7 @@ def generate_instance(
             y=float(facility_xy[index, 1]),
             capacity=float(capacities[index]),
             opening_cost=float(
-                capacities[index]
-                * config.opening_cost_per_capacity
-                * rng.uniform(0.85, 1.15)
+                capacities[index] * config.opening_cost_per_capacity * rng.uniform(0.85, 1.15)
             ),
         )
         for index in range(config.facility_count)
