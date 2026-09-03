@@ -83,7 +83,7 @@ def solve_master(
     if not result.success or result.x is None or result.fun is None:
         raise RuntimeError(f"Benders master failed: {result.message}")
     values = np.asarray(result.x, dtype=float)
-    y = tuple(int(round(value)) for value in values[:facility_count])
+    y = tuple(round(value) for value in values[:facility_count])
     theta = tuple(float(max(0.0, value)) for value in values[facility_count:])
     node_count_raw = getattr(result, "mip_node_count", 0)
     gap_raw = getattr(result, "mip_gap", None)
