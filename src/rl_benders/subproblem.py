@@ -119,9 +119,7 @@ def _solve_dual(
         0.0,
         np.max(penalties[:, None] - shipping, axis=0),
     )
-    bounds = [(0.0, None)] * customer_count + [
-        (0.0, float(limit)) for limit in lambda_upper
-    ]
+    bounds = [(0.0, None)] * customer_count + [(0.0, float(limit)) for limit in lambda_upper]
     result = linprog(
         objective,
         A_ub=np.asarray(rows, dtype=float),
