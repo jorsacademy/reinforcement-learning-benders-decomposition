@@ -1,0 +1,16 @@
+cff-version: 1.2.0
+message: "If you use this software in academic work, cite the repository and the exact version or commit."
+title: "Reinforcement Learning for Benders Decomposition"
+type: software
+authors:
+  - alias: jorsacademy
+version: 0.1.0
+date-released: 2026-09-03
+repository-code: "https://github.com/jorsacademy/reinforcement-learning-benders-decomposition"
+license: PolyForm-Noncommercial-1.0.0
+keywords:
+  - operations research
+  - Benders decomposition
+  - reinforcement learning
+  - stochastic programming
+  - facility location
